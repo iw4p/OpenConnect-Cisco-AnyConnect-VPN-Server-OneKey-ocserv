@@ -1,12 +1,16 @@
 #!/bin/bash
 cd ~
 echo "welcome"
-echo ip addr | grep -Po '(?!(inet 127.\d.\d.1))(inet \K(\d{1,3}\.){3}\d{1,3})' 
 
+echo "your network IP address is:"
+read interface
+ip=$(hostname -I|cut -f1 -d ' ')
+echo $ip
+
+echo "install gnutls-bin"
 sudo apt install gnutls-bin
 mkdir certificates
 cd certificates
-nano ca.tmpl
 
 cat << EOF > ca.tmpl
 cn = "VPN CA"
@@ -18,13 +22,26 @@ signing_key
 cert_signing_key
 crl_signing_key
 EOF
+
 certtool --generate-privkey --outfile ca-key.pem
 certtool --generate-self-signed --load-privkey ca-key.pem --template ca.tmpl --outfile ca-cert.pem
+
 cat << EOF > server.tmpl
-cn = "your ip"
+#yourIP
+cn=$ip
 organization = "my company"
 expiration_days = 3650
 signing_key
 encryption_key
 tls_www_server
 EOF
+
+certtool --generate-privkey --outfile server-key.pem
+certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
+
+echo "install ocserv"
+sudo apt install ocserv
+cp /etc/ocserv/ocserv.conf ~/certificates/
+
+
+
