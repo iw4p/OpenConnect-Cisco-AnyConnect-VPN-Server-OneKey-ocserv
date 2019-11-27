@@ -1,5 +1,5 @@
 # OpenConnect-VPN-Server
-Buggy script for configuring AnyConnect Server easily and automatically.
+Buggy script for configuring OpenConnect Server easily and automatically.
 
 ## Installation
 
@@ -13,5 +13,12 @@ And then just run it:
 ```sh
 ./ocserv-install.sh
 ``` 
+
+## Usage
+For making connection to your server, you can use `AnyConnect`, `OpenConnect` or other alternatives.
+
+
+- AnyConnect: [GUI AnyConnect client for available platforms](https://it.umn.edu/vpn-downloads-guides).
+- OpenConnect: [OpenConnect Client for Linux](https://computingforgeeks.com/how-to-connect-to-vpn-server-with-openconnect-ssl-vpn-client-on-linux/).
 
 And one more thing, contributions are welcome.
