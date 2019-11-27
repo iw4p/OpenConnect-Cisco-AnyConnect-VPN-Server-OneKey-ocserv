@@ -42,6 +42,23 @@ certtool --generate-certificate --load-privkey server-key.pem --load-ca-certific
 echo "install ocserv"
 sudo apt install ocserv
 cp /etc/ocserv/ocserv.conf ~/certificates/
+pass="passwd=/etc/ocserv/ocpasswd"
+sed -i -e 's@auth = "plain@#auth@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@try-mtu-discovery = @try-mtu-discovery = true @g' /etc/ocserv/ocserv.conf
+sed -i -e 's@dns = @dns = 8.8.8.8@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@route =@#route =@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@no-route =@#no-route =@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@cisco-client-compat@cisco-client-compat = true@g' /etc/ocserv/ocserv.conf
 
+echo "Enter a username:"
+read username
 
+ocpasswd -c /etc/ocserv/ocpasswd $username
+iptables -t nat -A POSTROUTING -j MASQUERADE
+sed -i -e 's@#net.ipv4.ip_forward@net.ipv4.ip_forward=1@g' /etc/ocserv/ocserv.conf
 
+sysctl -p /etc/sysctl.conf
+sudo service ocserv stop
+sudo service ocserv start
+
+echo "OpenConnect Server Configured Succesfully."
