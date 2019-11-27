@@ -1,5 +1,7 @@
 # OpenConnect-VPN-Server
-Buggy script for configuring OpenConnect Server easily and automaticly.
+Buggy script for configuring AnyConnect Server easily and automatically.
+
+## Installation
 
 Get the script on your server
 ```bash
@@ -12,4 +14,4 @@ And then just run it:
 ./ocserv-install.sh
 ``` 
 
-Contributions are welcome.
+And one more thing, contributions are welcome.
