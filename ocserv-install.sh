@@ -67,8 +67,9 @@ certtool --generate-certificate --load-privkey server-key.pem --load-ca-certific
 echo -e "\e[32mInstall ocserv\e[39m"
 apt install ocserv
 cp /etc/ocserv/ocserv.conf ~/certificates/
-pass="passwd=/etc/ocserv/ocpasswd"
+
 sed -i -e 's@auth = "plain@#auth@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@auth = "pem@auth = "plain[passwd=/etc/ocserv/ocpasswd]"@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@try-mtu-discovery = @try-mtu-discovery = true @g' /etc/ocserv/ocserv.conf
 sed -i -e 's@dns = @dns = 8.8.8.8@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@route =@#route =@g' /etc/ocserv/ocserv.conf
@@ -88,4 +89,4 @@ service ocserv stop
 echo -e "\e[32mStarting ocserv service\e[39m"
 service ocserv start
 
-echo "\e[32mOpenConnect Server Configured Succesfully.\e[39m"
+echo "OpenConnect Server Configured Succesfully"
