@@ -69,9 +69,9 @@ apt install ocserv
 cp /etc/ocserv/ocserv.conf ~/certificates/
 
 sed -i -e 's@auth = "plain@#auth@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@auth = "pem@auth = "plain[passwd=/etc/ocserv/ocpasswd]"@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@try-mtu-discovery = @try-mtu-discovery = true @g' /etc/ocserv/ocserv.conf
-sed -i -e 's@dns = @dns = 8.8.8.8@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@auth = "pam@auth = "plain[passwd=/etc/ocserv/ocpasswd]"@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@try-mtu-discovery = @try-mtu-discovery = true@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@dns = 8.8.4.4@dns = 8.8.8.8@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@route =@#route =@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@no-route =@#no-route =@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@cisco-client-compat@cisco-client-compat = true@g' /etc/ocserv/ocserv.conf
