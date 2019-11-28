@@ -68,13 +68,18 @@ echo -e "\e[32mInstall ocserv\e[39m"
 apt install ocserv
 cp /etc/ocserv/ocserv.conf ~/certificates/
 
-sed -i -e 's@auth = "plain@#auth@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@auth = "pam[gid-min=1000]"@auth = "plain[passwd=/etc/ocserv/ocpasswd]"@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@auth = "@#auth = "@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@auth = "pam@auth = "#auth = "pam"@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@try-mtu-discovery = @try-mtu-discovery = true@g' /etc/ocserv/ocserv.conf
-sed -i -e 's@dns = @dns = 8.8.8.8@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@dns = @#dns = @g' /etc/ocserv/ocserv.conf
+sed -i -e 's@# multiple servers.@dns = 8.8.8.8@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@route =@#route =@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@no-route =@#no-route =@g' /etc/ocserv/ocserv.conf
 sed -i -e 's@cisco-client-compat@cisco-client-compat = true@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@##auth = "#auth = "pam""@auth = "plain[passwd=/etc/ocserv/ocpasswd]"@g' /etc/ocserv/ocserv.conf
+
+sed -i -e 's@server-cert = /etc/ssl/certs/ssl-cert-snakeoil.pem@server-cert = /etc/ocserv/server-cert.pem@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@server-key = /etc/ssl/private/ssl-cert-snakeoil.key@server-key = /etc/ocserv/server-key.pem@g' /etc/ocserv/ocserv.conf
 
 echo "Enter a username:"
 read username
@@ -84,6 +89,8 @@ iptables -t nat -A POSTROUTING -j MASQUERADE
 sed -i -e 's@#net.ipv4.ip_forward@net.ipv4.ip_forward=1@g' /etc/ocserv/ocserv.conf
 
 sysctl -p /etc/sysctl.conf
+cp ~/certificates/server-key.pem /etc/ocserv/
+cp ~/certificates/server-cert.pem /etc/ocserv/
 echo -e "\e[32mStopping ocserv service\e[39m"
 service ocserv stop
 echo -e "\e[32mStarting ocserv service\e[39m"
