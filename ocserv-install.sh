@@ -29,7 +29,7 @@ echo '
      ░                                                        ░                                         
 '
 ip=$(hostname -I|cut -f1 -d ' ')
-echo "\e[96myour Server IP address is:$ip\e[39m"
+echo "Your Server IP address is:$ip"
 
 echo -e "\e[32mInstalling gnutls-bin\e[39m"
 
