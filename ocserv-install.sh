@@ -29,13 +29,11 @@ echo '
      ░                                                        ░                                         
 '
 ip=$(hostname -I|cut -f1 -d ' ')
+echo "your Server IP address is:$ip"
 
-echo "your network IP address is:$ip"
-# read interface
-# echo $ip
+echo -e "\e[5m\e[92mInstalling gnutls-bin"
 
-echo "install gnutls-bin"
-sudo apt install gnutls-bin
+apt install gnutls-bin
 mkdir certificates
 cd certificates
 
@@ -66,8 +64,8 @@ EOF
 certtool --generate-privkey --outfile server-key.pem
 certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
 
-echo "install ocserv"
-sudo apt install ocserv
+echo -e "\e[5m\e[92mInstall ocserv"
+apt install ocserv
 cp /etc/ocserv/ocserv.conf ~/certificates/
 pass="passwd=/etc/ocserv/ocpasswd"
 sed -i -e 's@auth = "plain@#auth@g' /etc/ocserv/ocserv.conf
@@ -85,7 +83,9 @@ iptables -t nat -A POSTROUTING -j MASQUERADE
 sed -i -e 's@#net.ipv4.ip_forward@net.ipv4.ip_forward=1@g' /etc/ocserv/ocserv.conf
 
 sysctl -p /etc/sysctl.conf
-sudo service ocserv stop
-sudo service ocserv start
+echo -e "\e[92mStopping ocserv service"
+service ocserv stop
+echo -e "\e[92mStarting ocserv service"
+service ocserv start
 
-echo "OpenConnect Server Configured Succesfully."
+echo "\e[32mOpenConnect Server Configured Succesfully."
