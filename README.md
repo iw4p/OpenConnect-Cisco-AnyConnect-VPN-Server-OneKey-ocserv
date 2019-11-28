@@ -12,6 +12,8 @@ chmod +x ocserv-install.sh
 And then just run it:
 ```sh
 ./ocserv-install.sh
+or
+sudo bash ocserv-install.sh
 ``` 
 
 ## Usage
