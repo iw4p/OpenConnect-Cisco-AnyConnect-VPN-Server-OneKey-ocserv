@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ "$EUID" -ne 0 ]]; then
-	echo "\e[31mPlease run as root\e[39m"
+	echo "Please run as root"
 	exit 1
 fi
 
