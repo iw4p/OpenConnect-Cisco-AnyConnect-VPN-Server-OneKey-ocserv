@@ -122,7 +122,7 @@ echo '
 '
 
 PS3='Please enter your choice: '
-options=("Install" "Uninstall" "Add user" "Change password of user" "Show all users")
+options=("Install" "Uninstall" "Add user" "Change password of user" "Show all users" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
