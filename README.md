@@ -1,5 +1,6 @@
 # OpenConnect-VPN-Server
 Buggy script for configuring OpenConnect Server easily and automatically.
+Tested on ubuntu 18.04 and 16.04.
 
 ## Installation
 
@@ -12,15 +13,22 @@ chmod +x ocserv-install.sh
 And then just run it:
 ```sh
 ./ocserv-install.sh
+``` 
 or
+```sh
 sudo bash ocserv-install.sh
 ``` 
+
+## Features
+- Installing 
+- Uninstalling
+- Add User
+- Change Password
 
 ## Usage
 For making connection to your server, you can use `AnyConnect`, `OpenConnect` or other alternatives.
 
-
 - AnyConnect: [GUI AnyConnect client for available platforms](https://it.umn.edu/vpn-downloads-guides).
-- OpenConnect: [OpenConnect Client for Linux](https://computingforgeeks.com/how-to-connect-to-vpn-server-with-openconnect-ssl-vpn-client-on-linux/).
+- OpenConnect: [OpenConnect client for Linux](https://computingforgeeks.com/how-to-connect-to-vpn-server-with-openconnect-ssl-vpn-client-on-linux/).
 
 And one more thing, contributions are welcome.

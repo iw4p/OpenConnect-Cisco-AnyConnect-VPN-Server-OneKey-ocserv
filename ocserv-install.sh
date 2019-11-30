@@ -38,7 +38,7 @@ EOF
 certtool --generate-privkey --outfile server-key.pem
 certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
 
-echo -e "\e[32mInstall ocserv\e[39m"
+echo -e "\e[32mInstalling ocserv\e[39m"
 apt install ocserv
 cp /etc/ocserv/ocserv.conf ~/certificates/
 
