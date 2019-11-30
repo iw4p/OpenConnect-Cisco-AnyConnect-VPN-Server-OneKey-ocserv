@@ -87,6 +87,10 @@ ocpasswd -c /etc/ocserv/ocpasswd $username
 
 }
 
+showUsers() {
+cat /etc/ocserv/ocpasswd
+}
+
 if [[ "$EUID" -ne 0 ]]; then
 	echo "Please run as root"
 	exit 1
@@ -118,7 +122,7 @@ echo '
 '
 
 PS3='Please enter your choice: '
-options=("Install" "Uninstall" "Add user" "Change password of user")
+options=("Install" "Uninstall" "Add user" "Change password of user" "Show all users")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -138,6 +142,10 @@ do
             addUser
 			break
             ;;
+        "Show all users")
+	    showUsers
+			break
+	    ;;
         "Quit")
             break
             ;;
