@@ -24,6 +24,10 @@ sudo bash ocserv-install.sh
 - Uninstalling
 - Add User
 - Change Password
+- Show All Users
+- Delete User
+- Lock User
+- Unlock User
 
 ## Usage
 For making connection to your server, you can use `AnyConnect`, `OpenConnect` or other alternatives.
