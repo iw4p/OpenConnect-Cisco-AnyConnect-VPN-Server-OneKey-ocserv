@@ -91,6 +91,24 @@ showUsers() {
 cat /etc/ocserv/ocpasswd
 }
 
+deleteUser() {
+echo "Enter a username:"
+read username
+ocpasswd -c /etc/ocserv/ocpasswd -d $username
+}
+
+lockUser() {
+echo "Enter a username:"
+read username
+ocpasswd -c /etc/ocserv/ocpasswd -l $username
+}
+
+unlockUser() {
+echo "Enter a username:"
+read username
+ocpasswd -c /etc/ocserv/ocpasswd -u $username
+}
+
 if [[ "$EUID" -ne 0 ]]; then
 	echo "Please run as root"
 	exit 1
@@ -121,8 +139,9 @@ echo '
      ░                                                        ░                                         
 '
 
+
 PS3='Please enter your choice: '
-options=("Install" "Uninstall" "Add user" "Change password of user" "Show all users" "Quit")
+options=("Install" "Uninstall" "Add User" "Change Password Of User" "Show all Users" "Delete User" "Lock User" "Unlock User" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -144,6 +163,18 @@ do
             ;;
         "Show all users")
 	    showUsers
+			break
+	    ;;
+        "Delete User")
+	    deleteUser
+			break
+	    ;;
+        "Lock User")
+	    lockUser
+			break
+	    ;;
+        "Unlock User")
+	    unlockUser
 			break
 	    ;;
         "Quit")
