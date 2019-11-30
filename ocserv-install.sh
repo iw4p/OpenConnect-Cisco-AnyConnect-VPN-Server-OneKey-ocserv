@@ -153,15 +153,15 @@ do
             uninstall
 			break
             ;;
-        "Add user")
+        "Add User")
             addUser
 			break
             ;;
-        "Change password of user")
+        "Change Password Of User")
             addUser
 			break
             ;;
-        "Show all users")
+        "Show all Users")
 	    showUsers
 			break
 	    ;;
