@@ -60,7 +60,7 @@ read username
 
 ocpasswd -c /etc/ocserv/ocpasswd $username
 iptables -t nat -A POSTROUTING -j MASQUERADE
-sed -i -e 's@#net.ipv4.ip_forward@net.ipv4.ip_forward=1@g' /etc/ocserv/ocserv.conf
+sed -i -e 's@#net.ipv4.ip_forward=@net.ipv4.ip_forward=1@g' /etc/sysctl.conf
 
 sysctl -p /etc/sysctl.conf
 cp ~/certificates/server-key.pem /etc/ocserv/
