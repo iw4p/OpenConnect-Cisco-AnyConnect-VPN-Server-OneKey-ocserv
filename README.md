@@ -1,8 +1,8 @@
 # OpenConnect-VPN-Server
 Buggy script for configuring OpenConnect (ocserv) protocol on the server easily and automatically.
+2022 OCT UPDATE: We dockerized and added Dockerfile to run it anywhere you want on any linux distro easily.
+## Script Installation
 Tested on ubuntu 18.04 and 16.04.
-
-## Installation
 
 Download and saving script on your server:
 ```bash
@@ -23,6 +23,43 @@ or
 sudo bash ocserv-install.sh
 ``` 
 
+## Docker Installation
+1. Install Docker
+2. Build docker image
+```bash
+$ docker build -t ocserv https://github.com/iw4p/OpenConnect-Cisco-AnyConnect-VPN-Server-OneKey-ocserv.git
+```
+
+3. Run docker container
+```bash
+$ docker run --name ocserv --privileged -p 443:443 -p 443:443/udp -d ocserv
+```
+
+4. Add user
+```bash
+$ docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd testUserName
+```
+
+5. Delete user
+```bash
+$ docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -d <username>
+```
+
+6. Lock user
+```bash
+$ docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -l <username>
+```
+
+6. Unlock user
+```bash
+$ docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -u <username>
+```
+
+6. Show all users
+```bash
+$ docker exec -ti cat /etc/ocserv/ocpasswd
+```
+
 ## Features
 - Installing 
 - Uninstalling
@@ -33,7 +70,7 @@ sudo bash ocserv-install.sh
 - Lock User
 - Unlock User
 
-## Usage
+## How to connect to it?
 For making connection to your server, you can use `AnyConnect`, `OpenConnect` or other alternative clients.
 
 - AnyConnect: [GUI AnyConnect client for available platforms](https://it.umn.edu/vpn-downloads-guides).
