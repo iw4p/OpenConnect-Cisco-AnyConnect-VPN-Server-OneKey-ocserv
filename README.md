@@ -1,12 +1,12 @@
 # OpenConnect-VPN-Server
+**2022 OCT UPDATE**: We dockerized and added Dockerfile to run it anywhere you want on any linux distro easily.
 Buggy script for configuring OpenConnect (ocserv) protocol on the server easily and automatically.
-2022 OCT UPDATE: We dockerized and added Dockerfile to run it anywhere you want on any linux distro easily.
 ## Script Installation
 Tested on ubuntu 18.04 and 16.04.
 
 Download and saving script on your server:
 ```bash
-curl -O https://raw.githubusercontent.com/iw4p/OpenConnect-VPN-Server/master/ocserv-install.sh
+curl -O https://raw.githubusercontent.com/iw4p/OpenConnect-Cisco-AnyConnect-VPN-Server-OneKey-ocserv/master/ocserv-install.sh
 ```
 
 Making script executable
@@ -27,37 +27,37 @@ sudo bash ocserv-install.sh
 1. Install Docker
 2. Build docker image
 ```bash
-$ docker build -t ocserv https://github.com/iw4p/OpenConnect-Cisco-AnyConnect-VPN-Server-OneKey-ocserv.git
+docker build -t ocserv https://github.com/iw4p/OpenConnect-Cisco-AnyConnect-VPN-Server-OneKey-ocserv.git
 ```
 
 3. Run docker container
 ```bash
-$ docker run --name ocserv --privileged -p 443:443 -p 443:443/udp -d ocserv
+docker run --name ocserv --privileged -p 443:443 -p 443:443/udp -d ocserv
 ```
 
 4. Add user
 ```bash
-$ docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd testUserName
+docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd testUserName
 ```
 
 5. Delete user
 ```bash
-$ docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -d <username>
+docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -d testUserName
 ```
 
 6. Lock user
 ```bash
-$ docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -l <username>
+docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -l testUserName
 ```
 
 6. Unlock user
 ```bash
-$ docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -u <username>
+docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -u testUserName
 ```
 
 6. Show all users
 ```bash
-$ docker exec -ti cat /etc/ocserv/ocpasswd
+docker exec -ti cat /etc/ocserv/ocpasswd
 ```
 
 ## Features
