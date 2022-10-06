@@ -40,29 +40,34 @@ docker run --name ocserv --privileged -p 443:443 -p 443:443/udp -d ocserv
 docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd testUserName
 ```
 
-5. Delete user
+5. Change user password
+```bash
+docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd testUserName
+```
+
+6. Delete user
 ```bash
 docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -d testUserName
 ```
 
-6. Lock user
+7. Lock user
 ```bash
 docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -l testUserName
 ```
 
-6. Unlock user
+8. Unlock user
 ```bash
 docker exec -ti ocserv ocpasswd -c /etc/ocserv/ocpasswd -u testUserName
 ```
 
-6. Show all users
+9. Show all users and their hashed password
 ```bash
-docker exec -ti cat /etc/ocserv/ocpasswd
+docker exec -ti ocserv cat /etc/ocserv/ocpasswd
 ```
 
 ## Features
-- Installing 
-- Uninstalling
+- Easy install
+- Easy uninstall
 - Add User
 - Change Password
 - Show All Users
