@@ -82,3 +82,6 @@ For making connection to your server, you can use `AnyConnect`, `OpenConnect` or
 - OpenConnect: [OpenConnect client for Linux](https://computingforgeeks.com/how-to-connect-to-vpn-server-with-openconnect-ssl-vpn-client-on-linux/).
 
 And one more thing, contributions are welcome.
+
+## More
+The script is based on [here](https://ocserv.gitlab.io/www/recipes-ocserv-configuration-basic.html)
