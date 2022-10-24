@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
+
+touch -a /data/ocpasswd
 iptables -t nat -A POSTROUTING -j MASQUERADE
-echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
+cp /etc/ocserv/sysctl.conf /etc/sysctl.conf
 sysctl -p
 exec "$@"
