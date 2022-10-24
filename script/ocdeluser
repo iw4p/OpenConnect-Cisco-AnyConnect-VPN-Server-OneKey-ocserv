@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ocpasswd -c /data/ocpasswd  -d "$@"
