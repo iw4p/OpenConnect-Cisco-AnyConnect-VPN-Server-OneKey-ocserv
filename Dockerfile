@@ -1,12 +1,14 @@
 FROM alpine:3.13
 
 ENV OCSERV_VERSION 1.1.2
+ENV MAXMIND_VERSION=1.7.1
 ENV CA_CN SAMPLE CA
 ENV CA_ORG Big Corp
 ENV SRV_CN SAMPLE server
 ENV SRV_ORG MyCompany
-RUN set -ex \
-    && apk add --no-cache --virtual .build-dependencies \
+RUN set -ex && \
+    apk update && \
+    apk add --no-cache --virtual .build-dependencies \
     readline-dev \
     libnl3-dev \
     xz \
@@ -26,7 +28,13 @@ RUN set -ex \
     krb5-dev \
     gnutls-utils \
     oath-toolkit-dev \
-    libmaxminddb-dev \
+    && wget https://github.com/maxmind/libmaxminddb/releases/download/${MAXMIND_VERSION}/libmaxminddb-${MAXMIND_VERSION}.tar.gz \
+    && tar xf libmaxminddb-${MAXMIND_VERSION}.tar.gz \
+    && cd libmaxminddb-${MAXMIND_VERSION} \
+    && ./configure \
+    && make \
+    && make check \
+    && make install \
     && wget ftp://ftp.infradead.org/pub/ocserv/ocserv-$OCSERV_VERSION.tar.xz \
     && mkdir -p /etc/ocserv \
     && tar xf ocserv-$OCSERV_VERSION.tar.xz \
@@ -59,13 +67,23 @@ RUN set -ex \
     && echo "encryption_key" >> server.tmpl \
     && echo "tls_www_server" >> server.tmpl \
     && certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem \
-    && touch /etc/ocserv/ocpasswd \
     && apk del .build-dependencies \
     && apk add --no-cache gnutls linux-pam krb5-libs libtasn1 oath-toolkit-liboath nettle libev protobuf-c musl lz4-libs libseccomp readline libnl3 iptables \
     && rm -rf /var/cache/apk/*
 WORKDIR /etc/ocserv
 COPY ocserv.conf /etc/ocserv/ocserv.conf
+COPY script/ocadduser  /usr/local/bin/ocadduser
+RUN chmod +x /usr/local/bin/ocadduser
+COPY script/ocdeluser  /usr/local/bin/ocdeluser
+RUN chmod +x /usr/local/bin/ocdeluser
+COPY script/oclukuser  /usr/local/bin/oclukuser
+RUN chmod +x /usr/local/bin/oclukuser
+COPY script/oculkuser  /usr/local/bin/oculkuser
+RUN chmod +x /usr/local/bin/oculkuser
+COPY script/oclsusers  /usr/local/bin/oclsusers
+RUN chmod +x /usr/local/bin/oclsusers
 COPY entrypoint.sh /entrypoint.sh
+COPY sysctl.conf /etc/ocserv/sysctl.conf
 EXPOSE 443/tcp
 EXPOSE 443/udp
 ENTRYPOINT ["sh", "/entrypoint.sh"]
