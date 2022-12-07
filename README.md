@@ -83,6 +83,9 @@ For making connection to your server, you can use `AnyConnect`, `OpenConnect` or
 
 And one more thing, contributions are welcome.
 
+### Issues
+Feel free to submit issues and enhancement requests or contact me via [vida.page/nima](https://vida.page/nima).
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=iw4p/OpenConnect-Cisco-AnyConnect-VPN-Server-OneKey-ocserv&type=Date)](https://star-history.com/#iw4p/OpenConnect-Cisco-AnyConnect-VPN-Server-OneKey-ocserv&Date)
