@@ -2,6 +2,8 @@
 
 install() {
 
+apt update -y
+
 ip=$(hostname -I|cut -f1 -d ' ')
 echo "Your Server IP address is:$ip"
 
