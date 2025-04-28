@@ -1,0 +1,13 @@
+services:
+
+  ocserv:
+    build:
+      context: .
+      dockerfile: ubuntu.dockerfile
+    volumes:
+    - ./ocserv.conf:/etc/ocserv/ocserv.conf
+    privileged: true
+    restart: always
+    ports:
+    - 444:443/tcp
+    - 444:443/udp
